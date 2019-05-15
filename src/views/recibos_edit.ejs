@@ -1,0 +1,31 @@
+<%- include ("partials/_header") %> 
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a href="/home/vistahome" class="navbar-brand">Factura System - Edicion de Recibos</a>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/recibos/update/<%= rows.id %>" method="post">
+                        <div class="form-group">
+
+                            <input type="text" name="serial_number" value="<%= rows.serialNumber %>" placeholder="Numero de Serie" class="form-control" required>
+                            <input type="text" name="date" value="<%= rows.date %>" placeholder="Fecha" class="form-control" required>
+                            <input type="text" name="issuer_name" value="<%= rows.issuerName %>" placeholder="Nombre del emisor" class="form-control" required>
+                            <input type="text" name="payment_concept" value="<%= rows.paymentConcept %>" placeholder="Metodo de Pago" class="form-control" required>
+                            <input type="text" name="amount_received" value="<%= rows.amountReceived %>" placeholder="Monto Recibido" class="form-control" required>
+                            <input type="text" name="address" value="<%= rows.address %>" placeholder="Direccion" class="form-control" required>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Edicion</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ("partials/_footer") %> 

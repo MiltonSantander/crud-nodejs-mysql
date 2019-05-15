@@ -1,0 +1,97 @@
+<%- include ("partials/_header") %> 
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a href="/home/vistahome" class="navbar-brand">Factura System - Productos</a>
+</nav>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Codigo de Barras</th>
+                        <th>Marca</th>
+                        <th>Tipo</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (rows) { %>
+                        <% for(var i=0; i<rows.length; i++){ %>
+                            <tr>
+                                <th><%= rows[i].name %></th>
+                                <th><%= rows[i].barcode %></th>
+                                <th><%= rows[i].brandName %></th>
+                                <th><%= rows[i].typeName %></th>
+                                <th><%= rows[i].price +" Gs." %></th>
+                                <th>
+                                    <a href="/productos/update/<%= rows[i].id %>" class="btn btn-info">Editar</a>
+                                    <a href="/productos/delete/<%= rows[i].id %>" class="btn btn-danger">Delete</a>
+                                </th>
+                            </tr>
+                        <% } %>   
+                    <% } %>
+                    <% if (!rows) { %>     
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                                <th scope="row">No existen datos guardados.</th>
+                            </tbody>
+                        </table>
+                    <% } %> 
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/productos/add" method="post">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Nombre" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="barcode" placeholder="Codigo de barras" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <select type="text" name="id_brand" class="form-control" required>
+                                <option value="" disabled selected hidden>Marca</option><!--El placeholder del select es una opcion del select con atributos: desactivado(para que no se pueda seleccionar), seleccionado(para que se meustre por defecto) y oculto(para que no se muestre como opcion una vez que se despliegue el select) -->
+                                <% rows2.forEach(function(rows2) { %>
+                                    <option name = "brand" id = "<%= rows2.brandId %>" value="<%= rows2.brandId %>"><%= rows2.brandName %></option>
+                                <% }); %>
+
+                                <!-- for(var i=0; i<rows2.length; i++) { 
+                                    <option name = "brand" value="rows2[i].brandName">rows2[i].brandName</option>
+                                } -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select type="text" name="id_type" class="form-control" required>
+                                <option value="" disabled selected hidden>Tipo</option>
+                                <% rows3.forEach(function(rows3) { %>
+                                    <option name = "type" id = "<%= rows3.typeId %>" value = "<%= rows3.typeId %>"><%= rows3.typeName %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group">
+                            <input type="text" name="brand" placeholder="Marca" class="form-control">
+                        </div> -->
+                        <!-- <div class="form-group">
+                            <input type="text" name="type" placeholder="Tipo" class="form-control">
+                        </div> -->
+                        <div class="form-group">
+                            <input type="text" name="price" placeholder="Precio" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="quantity" placeholder="Cantidad" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+<%- include ("partials/_footer") %> 

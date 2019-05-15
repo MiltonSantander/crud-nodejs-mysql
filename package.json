@@ -1,0 +1,19 @@
+{
+  "name": "crud-nodejs-mysql",
+  "version": "1.0.0",
+  "description": "crud para el proyecto FacturaSystem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Milton Garcia",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "ejs": "^3.1.8",
+    "express": "^4.17.1",
+    "express-myconnection": "^1.0.4",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
+  }
+}

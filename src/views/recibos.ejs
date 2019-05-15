@@ -1,0 +1,70 @@
+<%- include ("partials/_header") %> 
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a href="/home/vistahome" class="navbar-brand">Factura System - Recibos</a>
+</nav>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Numero de Serie</th>
+                        <th>Fecha</th>
+                        <th>Nombre del emisor</th>
+                        <th>Concepto de Pago</th>
+                        <th>Monto Recibido</th>
+                        <th>Direccion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% if (rows) { %>
+                        <% for(var i=0; i<rows.length; i++){ %>
+                            <tr>
+                                <th><%= rows[i].serialNumber %></th>
+                                <th><%= rows[i].date %></th>
+                                <th><%= rows[i].issuerName %></th>
+                                <th><%= rows[i].paymentConcept %></th>
+                                <th><%= rows[i].amountReceived %></th>
+                                <th><%= rows[i].address %></th>
+                                <th>
+                                    <a href="/recibos/update/<%= rows[i].id %>" class="btn btn-info">Editar</a>
+                                    <a href="/recibos/delete/<%= rows[i].id %>" class="btn btn-danger">Delete</a>
+                                </th>
+                            </tr>
+                        <% } %>   
+                    <% } %>
+                    <% if (!rows) { %>     
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                                <th scope="row">No existen datos guardados.</th>
+                            </tbody>
+                        </table>
+                    <% } %> 
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/recibos/add" method="post">
+                        <div class="form-group">
+                            <input type="text" name="serial_number" placeholder="Numero de Serie" class="form-control" required>
+                            <input type="text" name="date" placeholder="Fecha" class="form-control" required>
+                            <input type="text" name="issuer_name" placeholder="Nombre del emisor" class="form-control" required>
+                            <input type="text" name="payment_concept" placeholder="Metodo de Pago" class="form-control" required>
+                            <input type="text" name="amount_received" placeholder="Monto Recibido" class="form-control" required>
+                            <input type="text" name="address" placeholder="Direccion" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+<%- include ("partials/_footer") %> 
